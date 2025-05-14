@@ -5,12 +5,14 @@
 
 class Player{
 private:
+  struct Game* game;
   float speed;
   SDL_FRect body;
+  const bool* ks;
 public:
-  Player(float x, float y, float speed);
-  void drawSelf(SDL_Renderer* renderer);
-  void move(float x, float y);
+  Player(struct Game* game, float x, float y, float speed);
+  void step();
+  void move(int x, int y);
   int* getLocation();
 };
 
