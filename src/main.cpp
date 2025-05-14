@@ -1,10 +1,10 @@
 #include <SDL3/SDL.h>
+#include <vector>
+#include <iostream>
+#include "Object.h"
 #include "Player.h"
+#include "Floater.h"
 #include "Game.h"
-
-//Initializes everything
-void init(Game* game){
-}
 
 void clear(SDL_Renderer* renderer){
   SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, SDL_ALPHA_OPAQUE);
@@ -16,8 +16,9 @@ int step(Game* game){
   //clear and setup
   clear(game->renderer);
   SDL_PumpEvents();
-  
-  game->player->step();
+  for(int i = 0; i < game->objects.size(); i++){ 
+    game->objects[i]->step();
+  }
   
   SDL_RenderPresent(game->renderer);
   
@@ -27,8 +28,11 @@ int step(Game* game){
 
 int main(){
   Game game;
-  init(&game);
-  
+  Player* player = new Player(&game, 100, 100, 5);
+  Floater* floater = new Floater(&game, 50, 100, 2);
+  game.objects.push_back(player);
+  game.objects.push_back(floater);
+
   while(1){
     if(!step(&game)) return 0;
     SDL_Delay(10);

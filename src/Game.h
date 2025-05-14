@@ -2,13 +2,14 @@
 #define GAME_H
 
 #include <SDL3/SDL.h>
-#include "Player.h"
+#include <vector>
+#include "Object.h"
 
 class Game{
 public:
   SDL_Window* window;
   SDL_Renderer* renderer;
-  Player* player;
+  std::vector<Object*> objects;
   const bool* keyboard_state;
 
   Game();
