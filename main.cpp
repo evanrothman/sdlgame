@@ -2,11 +2,12 @@
 #include <SDL3/SDL_main.h>
 
 struct Game{
-  SDL_Window* window;
+  SDL_Window* window; 
   SDL_Renderer* renderer;
   SDL_FRect rectangle;
 };
 
+//Initializes everything
 void init(struct Game* game){
   SDL_Init(SDL_INIT_VIDEO);
   game->window = SDL_CreateWindow("SDL3", 640, 480, 0);
@@ -14,14 +15,7 @@ void init(struct Game* game){
   game->rectangle = {100, 100, 100, 100};
 }
 
-void close(struct Game* game){
-  SDL_DestroyWindow(game->window);
-  SDL_DestroyRenderer(game->renderer);
-  game->renderer = NULL;
-  game->renderer = NULL;
-  SDL_Quit();
-}
-
+//Should be called every frame of the frame
 void step(struct Game* game){
     SDL_SetRenderDrawColor(game->renderer, 0xff, 0xff, 0xff, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(game->renderer);
@@ -36,10 +30,11 @@ int main(){
   int i;
   struct Game game;
   init(&game);
+  //This will eventually be a while loop
   for(i = 0; i < 200; i++){
     step(&game);
     SDL_Delay(20);
   }
-  close(&game);
+  SDL_Quit();
   return 1;
 }
