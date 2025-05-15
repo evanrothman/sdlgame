@@ -9,10 +9,12 @@ class Game{
 public:
   SDL_Window* window;
   SDL_Renderer* renderer;
+  int height;
+  int width;
   std::vector<Object*> objects;
   const bool* keyboard_state;
 
-  Game();
+  Game(int width, int height);
 };
 
 #endif

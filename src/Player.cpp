@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "Game.h"
+#include <algorithm>
+#include <iostream>
 
 Player::Player(Game* game, float x, float y, float speed){
   this->game = game;
@@ -9,8 +11,8 @@ Player::Player(Game* game, float x, float y, float speed){
 }
 
 void Player::move(int x, int y){
-  body.x += x * speed;
-  body.y += y * speed;
+  body.x = std::clamp((double)body.x + x * speed, 0.0, game->width - 100.0);
+  body.y = std::clamp((double)body.y + y * speed, 0.0, game->height - 100.0);
 }
 
 void Player::step(){

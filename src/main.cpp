@@ -27,7 +27,7 @@ int step(Game* game){
 }
 
 int main(){
-  Game game;
+  Game game(640, 480);
   Player* player = new Player(&game, 100, 100, 5);
   Floater* floater = new Floater(&game, 50, 100, 2);
   game.objects.push_back(player);

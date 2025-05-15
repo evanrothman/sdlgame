@@ -1,8 +1,10 @@
 #include "Game.h"
 
-Game::Game(){
+Game::Game(int width, int height){
   SDL_Init(SDL_INIT_VIDEO);
-  window = SDL_CreateWindow("SDL3", 640, 480, 0);
+  this->width = width;
+  this->height = height;
+  window = SDL_CreateWindow("SDL3", width, height, 0);
   renderer = SDL_CreateRenderer(window, NULL);
   keyboard_state = SDL_GetKeyboardState(NULL);
 }
