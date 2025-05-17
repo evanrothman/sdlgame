@@ -13,6 +13,7 @@ private:
 public:
   Player(Game* game, float x, float y, float speed);
   void step();
+  bool checkCollision(Object* object);
   void move(int x, int y);
 };
 

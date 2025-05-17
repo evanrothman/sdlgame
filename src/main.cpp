@@ -4,6 +4,7 @@
 #include "Object.h"
 #include "Player.h"
 #include "Floater.h"
+#include "Projectile.h"
 #include "Game.h"
 
 void clear(SDL_Renderer* renderer){
@@ -30,8 +31,10 @@ int main(){
   Game game(640, 480);
   Player* player = new Player(&game, 100, 100, 5);
   Floater* floater = new Floater(&game, 50, 100, 2);
+  Projectile* projectile = new Projectile(&game, 400, 400, 1);
   game.objects.push_back(player);
   game.objects.push_back(floater);
+  game.objects.push_back(projectile);
 
   while(1){
     if(!step(&game)) return 0;
