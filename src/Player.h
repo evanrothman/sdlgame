@@ -9,10 +9,12 @@ private:
   Game* game;
   float speed;
   const bool* ks;
-
+  
+  void destroy(int i);
   bool checkCollision(Object* object);
   void move(int x, int y);
 public:
+  int hp;
   Player(Game* game, float x, float y, float speed);
   void step();
 };

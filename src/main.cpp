@@ -17,7 +17,9 @@ int step(Game* game){
   clear(game->renderer);
   SDL_PumpEvents();
   for(int i = 0; i < game->objects.size(); i++){ 
-    game->objects[i]->step();
+    if(game->objects[i]){
+      game->objects[i]->step();
+    }
   }
   
   SDL_RenderPresent(game->renderer);
@@ -29,7 +31,9 @@ int step(Game* game){
 int main(){
   Game game(640, 480);
   game.objects.push_back(new Player(&game, 100, 100, 5));
-  game.objects.push_back(new Projectile(&game, 300, 300, 0, 0));
+  for(int i = 50; i < 450; i += 40){
+    game.objects.push_back(new Projectile(&game, 300, i, 0, 0));
+  }
 
   while(1){
     if(!step(&game)) return 0;
