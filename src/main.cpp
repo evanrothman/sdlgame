@@ -3,7 +3,6 @@
 #include <iostream>
 #include "Object.h"
 #include "Player.h"
-#include "Floater.h"
 #include "Projectile.h"
 #include "Game.h"
 
@@ -29,12 +28,8 @@ int step(Game* game){
 
 int main(){
   Game game(640, 480);
-  Player* player = new Player(&game, 100, 100, 5);
-  Floater* floater = new Floater(&game, 50, 100, 2);
-  Projectile* projectile = new Projectile(&game, 400, 400, 1);
-  game.objects.push_back(player);
-  game.objects.push_back(floater);
-  game.objects.push_back(projectile);
+  game.objects.push_back(new Player(&game, 100, 100, 5));
+  game.objects.push_back(new Projectile(&game, 300, 300, 0, 0));
 
   while(1){
     if(!step(&game)) return 0;

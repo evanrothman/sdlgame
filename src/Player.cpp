@@ -1,41 +1,41 @@
 #include "Player.h"
-#include "Game.h"
 #include <algorithm>
+#include <vector>
 #include <iostream>
 #include <cmath>
 
-Player::Player(Game* game, float x, float y, float speed){
-  this->game = game;
-  body = {x, y, 100, 100};
-  this->speed = speed;
+Player::Player(Game* game, float x, float y, float speed)
+  : Object(x, y, 100, 100), game(game), speed(speed){ 
   this->ks = SDL_GetKeyboardState(NULL);
   this->type = "player";
 }
 
-void Player::move(int x, int y){
-  body.x = std::clamp((double)body.x + x * speed, 0.0, game->width - 100.0);
-  body.y = std::clamp((double)body.y + y * speed, 0.0, game->height - 100.0);
+void Player::move(int dx, int dy){
+  x = std::clamp((double)x + dx * speed, 0.0, (double)game->width);
+  y = std::clamp((double)y + dy * speed, 0.0, (double)game->height);
+  body.x = x - (w / 2);
+  body.y = y - (h / 2);
 }
 
 bool Player::checkCollision(Object* other){
-  return (std::abs(other->body.x - this->body.x) < 65) && (std::abs(other->body.y - this->body.y) < 65);
+  return (std::abs(other->x - x) < 65) && (std::abs(other->y - y) < 65);
 }
 
 void Player::step(){
-  int x = ks[SDL_SCANCODE_D] - ks[SDL_SCANCODE_A];
-  int y = ks[SDL_SCANCODE_S] - ks[SDL_SCANCODE_W];
-  
-  move(x, y);
+  int dx = ks[SDL_SCANCODE_D] - ks[SDL_SCANCODE_A];
+  int dy = ks[SDL_SCANCODE_S] - ks[SDL_SCANCODE_W];
+  move(dx, dy);
   
   for(Object* o: game->objects){
-    if(o->type == "projectile"){
-      if(checkCollision(o)){
-        body.x = 500;
-        body.y = 500;
+    if(o->getType() == "projectile"){
+     if(checkCollision(o)){
+        game->objects.erase(game->objects.begin() + (&o - &game->objects[0]));
+        delete o;
       }
     }
   }
-  
-  SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+  SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 0xff);
   SDL_RenderFillRect(game->renderer, &body);
+  SDL_SetRenderDrawColor(game->renderer, 0xff, 0, 0, 0xff);
+  SDL_RenderPoint(game->renderer, x, y);
 }

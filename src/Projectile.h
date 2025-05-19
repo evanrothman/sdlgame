@@ -4,13 +4,12 @@
 #include <SDL3/SDL.h>
 #include "Game.h"
 
-class Projectile : public Object{
+class Projectile: public Object{
 private:
   Game* game;
-  float speed;
-  float angle;
+  float speed, angle;
 public:
-  Projectile(Game* game, float x, float y, float speed);
+  Projectile(Game* game, float x, float y, float speed, float angle);
   void step();
 };
 

@@ -8,13 +8,13 @@ class Player : public Object{
 private:
   Game* game;
   float speed;
-  SDL_FRect body;
   const bool* ks;
+
+  bool checkCollision(Object* object);
+  void move(int x, int y);
 public:
   Player(Game* game, float x, float y, float speed);
   void step();
-  bool checkCollision(Object* object);
-  void move(int x, int y);
 };
 
 #endif

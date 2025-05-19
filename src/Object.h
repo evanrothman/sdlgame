@@ -6,8 +6,12 @@
 
 class Object{
 public:
+  float x, y, h, w;
   SDL_FRect body;
+  
+  Object(float x, float y, float h, float w);
   std::string type;
+  std::string getType() const;
   virtual void step();
 };
 
