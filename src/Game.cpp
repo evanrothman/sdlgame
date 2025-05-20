@@ -9,3 +9,13 @@ Game::Game(int width, int height){
   keyboard_state = SDL_GetKeyboardState(NULL);
 }
 
+void Game::createObject(Object* o){
+  for(int i = 0; i < objects.size(); i++){
+    if(objects[i] == NULL){
+      objects[i] = o;
+      return;
+    }
+  }
+  objects.push_back(o);
+}
+

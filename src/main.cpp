@@ -1,9 +1,10 @@
 #include <SDL3/SDL.h>
 #include <vector>
 #include <iostream>
+#include <cmath>
 #include "Object.h"
 #include "Player.h"
-#include "Projectile.h"
+#include "Spawner.h"
 #include "Game.h"
 
 void clear(SDL_Renderer* renderer){
@@ -30,11 +31,8 @@ int step(Game* game){
 
 int main(){
   Game game(640, 480);
-  game.objects.push_back(new Player(&game, 100, 100, 5));
-  for(int i = 50; i < 450; i += 40){
-    game.objects.push_back(new Projectile(&game, 300, i, 0, 0));
-  }
-
+  game.objects.push_back(new Player(&game, 320, 240, 5));
+  game.createObject(new Spawner(&game));
   while(1){
     if(!step(&game)) return 0;
     SDL_Delay(10);

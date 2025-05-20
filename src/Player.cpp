@@ -5,7 +5,7 @@
 #include <cmath>
 
 Player::Player(Game* game, float x, float y, float speed)
-  : Object(x, y, 100, 100), game(game), speed(speed){ 
+  : Object(x, y, 10, 10), game(game), speed(speed){ 
   ks = SDL_GetKeyboardState(NULL);
   type = "player";
   hp = 10;
@@ -24,7 +24,9 @@ void Player::destroy(int i){
 }
 
 bool Player::checkCollision(Object* other){
-  return (std::abs(other->x - x) < 65) && (std::abs(other->y - y) < 65);
+  double dx = other->x - x;
+  double dy = other->y - y;
+  return (sqrt((dx * dx) + (dy * dy)) < w/2 + other->w/2);
 }
 
 void Player::step(){
@@ -43,6 +45,7 @@ void Player::step(){
       }
     }
   }
+
   SDL_SetRenderDrawColor(game->renderer, 0, 0, 0, 0xff);
   SDL_RenderFillRect(game->renderer, &body);
 }

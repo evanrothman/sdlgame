@@ -13,7 +13,8 @@ public:
   int width;
   std::vector<Object*> objects;
   const bool* keyboard_state;
-
+  
+  void createObject(Object* o);
   Game(int width, int height);
 };
 
