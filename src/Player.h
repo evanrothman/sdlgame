@@ -10,7 +10,6 @@ private:
   float speed;
   const bool* ks;
   
-  void destroy(int i);
   bool checkCollision(Object* object);
   void move(int x, int y);
 public:

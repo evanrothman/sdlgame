@@ -18,10 +18,6 @@ void Player::move(int dx, int dy){
   body.y = y - (h / 2);
 }
 
-void Player::destroy(int i){
-  delete game->objects[i];
-  game->objects[i] = NULL;
-}
 
 bool Player::checkCollision(Object* other){
   double dx = other->x - x;
@@ -39,8 +35,8 @@ void Player::step(){
     if(o){
       if(o->getType() == "projectile"){
         if(checkCollision(o)){
-          destroy(i);
-          if(--hp < 1) destroy(0);
+          game->destroy(i);
+          if(--hp < 1) game->destroy(this);
         }
       }
     }

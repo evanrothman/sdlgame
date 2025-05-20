@@ -9,6 +9,7 @@ Projectile::Projectile(Game* game, float x, float y, float speed, float angle)
 void Projectile::step(){
   x += speed * cos(angle);
   y += speed * sin(angle);
+  if(x > game->width || x < 0 || y > game->height || y < 0) game->destroy(this);
   body.x = x - (w / 2);
   body.y = y - (h / 2);
   SDL_SetRenderDrawColor(game->renderer, 0xff, 0, 0, 0xff);

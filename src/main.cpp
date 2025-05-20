@@ -31,7 +31,7 @@ int step(Game* game){
 
 int main(){
   Game game(640, 480);
-  game.objects.push_back(new Player(&game, 320, 240, 5));
+  game.objects.push_back(new Player(&game, 100, 100, 5));
   game.createObject(new Spawner(&game));
   while(1){
     if(!step(&game)) return 0;

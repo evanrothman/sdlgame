@@ -14,6 +14,8 @@ public:
   std::vector<Object*> objects;
   const bool* keyboard_state;
   
+  void destroy(int i);
+  void destroy(Object* o);
   void createObject(Object* o);
   Game(int width, int height);
 };

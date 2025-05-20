@@ -19,3 +19,16 @@ void Game::createObject(Object* o){
   objects.push_back(o);
 }
 
+void Game::destroy(int i){
+  delete objects[i];
+  objects[i] = NULL;
+}
+
+void Game::destroy(Object* o){
+  for(int i = 0; i < objects.size(); i++){
+    if(o == objects[i]){
+      destroy(i);
+      return;
+    }
+  }
+}
