@@ -32,3 +32,6 @@ void Game::destroy(Object* o){
     }
   }
 }
+
+void Game::reset(){
+}

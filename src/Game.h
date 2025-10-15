@@ -17,6 +17,7 @@ public:
   void destroy(int i);
   void destroy(Object* o);
   void createObject(Object* o);
+  void reset();
   Game(int width, int height);
 };
 
